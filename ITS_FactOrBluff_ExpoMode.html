@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#00071a">
+<meta name="theme-color" content="#00205b">
 <title>ITS Fact or Bluff?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,74 +15,73 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
   --navy:#00205b;--bg:#00071a;--dark:#000d2e;
-  --gold:#ffa300;--gold2:rgba(255,163,0,.18);
-  --cyan:#00e5ff;--mag:#ff3399;
+  --gold:#ffa300;--cyan:#00e5ff;--mag:#ff3399;
   --green:#00ff88;--red:#ff3355;--white:#fff;
   --fact:#10c0f1;--bluff:#ff5714;
 }
-html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);
+html,body{width:100%;height:100%;overflow:hidden;background:var(--navy);
   font-family:'DM Sans',sans-serif;touch-action:manipulation;
   -webkit-tap-highlight-color:transparent;}
-body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:
-    repeating-linear-gradient(45deg,transparent,transparent 60px,rgba(255,163,0,.016) 60px,rgba(255,163,0,.016) 61px),
-    repeating-linear-gradient(-45deg,transparent,transparent 60px,rgba(255,163,0,.016) 60px,rgba(255,163,0,.016) 61px);}
 .screen{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;
   align-items:center;justify-content:center;padding:20px;background:var(--bg);
   transition:opacity .28s,visibility .28s;}
 .screen.off{opacity:0;visibility:hidden;pointer-events:none;}
 
-/* ── ATTRACT ────────────────────────────────────── */
+/* ── ATTRACT ─────────────────────────────────────────── */
 #attract{
-  z-index:200;text-align:center;cursor:pointer;user-select:none;
-  gap:8px;padding:24px 20px;
-  /* Hero photo background — upload hero_bg.jpg to your GitHub repo */
-  background:
-    linear-gradient(to bottom,
-      rgba(0,7,26,.55) 0%,
-      rgba(0,7,26,.40) 40%,
-      rgba(0,7,26,.72) 75%,
-      rgba(0,7,26,.92) 100%),
-    url('https://raw.githubusercontent.com/ITSMalta/Playing-Cards/main/hero_bg.jpg')
-      center 30% / cover no-repeat;
-  background-color:var(--bg);
+  z-index:200;text-align:center;cursor:pointer;user-select:none;gap:10px;
+  /* Clean ITS navy — no photo clash */
+  background:radial-gradient(ellipse 100% 60% at 50% 0%,
+      rgba(16,192,241,.12) 0%, rgba(0,32,91,.0) 55%),
+    radial-gradient(ellipse 80% 50% at 50% 100%,
+      rgba(255,87,20,.08) 0%, transparent 60%),
+    var(--navy);
 }
-.a-logo{width:min(110px,22vw);border-radius:10px;margin-bottom:2px;
-  filter:drop-shadow(0 0 18px rgba(255,163,0,.5));
-  animation:glow 3s ease-in-out infinite;}
-.a-title{font-family:'Playfair Display',serif;font-size:clamp(40px,10vw,90px);
-  font-weight:900;line-height:1;color:var(--white);letter-spacing:-1px;
-  text-shadow:0 2px 20px rgba(0,0,0,.8);}
-.a-title span.fact{
-  color:var(--fact);
-  text-shadow:0 0 18px var(--fact),0 0 50px rgba(16,192,241,.5),0 2px 8px rgba(0,0,0,.8);}
-.a-title span.bluff{
-  color:var(--bluff);
-  text-shadow:0 0 18px var(--bluff),0 0 50px rgba(255,87,20,.5),0 2px 8px rgba(0,0,0,.8);}
-.a-sub{font-size:clamp(13px,2.8vw,20px);color:var(--gold);font-weight:700;
-  letter-spacing:2px;text-transform:uppercase;
-  text-shadow:0 0 12px rgba(255,163,0,.6),0 2px 6px rgba(0,0,0,.8);}
-.a-card-back{width:min(110px,22vw,16vh);border-radius:12px;
-  box-shadow:0 0 30px rgba(16,192,241,.2),0 12px 40px rgba(0,0,0,.7);
-  animation:float-card 4s ease-in-out infinite;}
-.a-tap{font-size:clamp(11px,2vw,14px);color:rgba(255,255,255,.6);
-  letter-spacing:2px;text-transform:uppercase;
-  animation:pulse 2s ease-in-out infinite;
-  text-shadow:0 1px 4px rgba(0,0,0,.8);}
-.a-qr-wrap{display:flex;flex-direction:column;align-items:center;gap:5px;margin-top:2px;}
-.a-qr-label{font-size:11px;color:rgba(255,255,255,.55);letter-spacing:1px;text-transform:uppercase;
-  text-shadow:0 1px 3px rgba(0,0,0,.8);}
-.a-qr-box{background:#fff;padding:7px;border-radius:8px;
-  box-shadow:0 0 20px rgba(255,163,0,.25),0 4px 16px rgba(0,0,0,.5);}
-.a-qr-hint{font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.5px;
-  text-shadow:0 1px 3px rgba(0,0,0,.8);}
-@keyframes float-card{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-10px) rotate(3deg);}}
+/* Subtle diagonal texture */
+#attract::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(45deg,transparent,transparent 80px,
+    rgba(255,255,255,.018) 80px,rgba(255,255,255,.018) 81px),
+    repeating-linear-gradient(-45deg,transparent,transparent 80px,
+    rgba(255,255,255,.018) 80px,rgba(255,255,255,.018) 81px);}
 
-/* ── MODE SELECT ───────────────────────────────── */
+/* Logo — mix-blend-mode:screen drops the black background so only white shows */
+.a-logo{width:min(140px,28vw);margin-bottom:4px;
+  mix-blend-mode:screen;
+  filter:drop-shadow(0 0 16px rgba(255,163,0,.5));
+  animation:logo-glow 3s ease-in-out infinite;}
+@keyframes logo-glow{
+  0%,100%{filter:drop-shadow(0 0 10px rgba(255,163,0,.35));}
+  50%    {filter:drop-shadow(0 0 28px rgba(255,163,0,.75));}}
+
+.a-title{font-family:'Playfair Display',serif;
+  font-size:clamp(42px,11vw,96px);font-weight:900;line-height:1;
+  color:var(--white);letter-spacing:-1px;}
+.a-title .fact{color:var(--fact);
+  text-shadow:0 0 20px var(--fact),0 0 60px rgba(16,192,241,.45);}
+.a-title .bluff{color:var(--bluff);
+  text-shadow:0 0 20px var(--bluff),0 0 60px rgba(255,87,20,.45);}
+.a-sub{font-size:clamp(13px,2.8vw,20px);color:var(--gold);font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;
+  text-shadow:0 0 14px rgba(255,163,0,.5);}
+.a-card-back{width:min(120px,24vw,17vh);border-radius:12px;
+  box-shadow:0 0 30px rgba(16,192,241,.2),0 14px 40px rgba(0,0,0,.55);
+  animation:float-card 4s ease-in-out infinite;}
+@keyframes float-card{0%,100%{transform:translateY(0) rotate(-3deg);}
+  50%{transform:translateY(-10px) rotate(3deg);}}
+.a-tap{font-size:clamp(11px,2vw,14px);color:rgba(255,255,255,.5);
+  letter-spacing:2px;text-transform:uppercase;
+  animation:pulse 2s ease-in-out infinite;}
+.a-qr-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:4px;}
+.a-qr-label{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:1px;text-transform:uppercase;}
+.a-qr-box{background:#fff;padding:7px;border-radius:8px;
+  box-shadow:0 0 20px rgba(255,163,0,.25),0 4px 16px rgba(0,0,0,.4);}
+.a-qr-hint{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.5px;}
+
+/* ── MODE SELECT ────────────────────────────────────── */
 #mode-select{gap:24px;}
 .ms-title{font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,40px);
-  color:var(--white);font-weight:900;text-align:center;margin-bottom:8px;}
-.ms-sub{font-size:13px;color:rgba(255,255,255,.5);text-align:center;margin-bottom:16px;}
+  color:var(--white);font-weight:900;text-align:center;}
+.ms-sub{font-size:13px;color:rgba(255,255,255,.5);text-align:center;margin-bottom:8px;}
 .ms-cards{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
 .ms-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,163,0,.2);
   border-radius:20px;padding:28px 32px;cursor:pointer;text-align:center;
@@ -92,7 +91,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .ms-card-label{font-size:17px;font-weight:800;color:var(--white);margin-bottom:6px;}
 .ms-card-desc{font-size:12px;color:rgba(255,255,255,.5);line-height:1.4;}
 
-/* ── SINGLE SETUP ──────────────────────────────── */
+/* ── SINGLE SETUP ───────────────────────────────────── */
 #s-setup{gap:18px;}
 .ss-title{font-family:'Playfair Display',serif;font-size:clamp(20px,4.5vw,36px);
   color:var(--white);font-weight:900;text-align:center;}
@@ -115,7 +114,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   box-shadow:0 6px 24px rgba(255,163,0,.35);}
 .start-btn:active{transform:scale(.97);}
 
-/* ── DISTRIBUTED SETUP ─────────────────────────── */
+/* ── DISTRIBUTED SETUP ──────────────────────────────── */
 #d-setup{gap:20px;text-align:center;}
 .ds-title{font-family:'Playfair Display',serif;font-size:clamp(20px,4.5vw,36px);
   color:var(--white);font-weight:900;}
@@ -139,10 +138,9 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   border-radius:10px;padding:10px 20px;color:rgba(255,255,255,.45);
   font-size:13px;font-family:inherit;cursor:pointer;margin-top:4px;}
 
-/* ── GAME SCREEN ───────────────────────────────── */
+/* ── GAME SCREEN ────────────────────────────────────── */
 #game{padding:0;justify-content:stretch;}
-
-/* grid keeps card centred even in 1-player mode */
+/* Grid keeps card centred in both 1- and 2-player modes */
 .g-split{display:grid;grid-template-columns:1fr auto 1fr;
   align-items:stretch;height:100%;width:100%;}
 .g-panel{display:flex;flex-direction:column;align-items:center;
@@ -155,13 +153,10 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .g-panel-score.popping{animation:pop .3s cubic-bezier(.2,2,.3,1);}
 .combo-badge{font-size:11px;font-weight:700;color:var(--cyan);letter-spacing:1px;
   min-height:16px;text-transform:uppercase;}
-
-.g-center{flex:0 0 auto;width:min(320px,50vw,58vh);display:flex;
-  flex-direction:column;align-items:center;justify-content:center;
-  gap:10px;padding:12px 6px;}
-
-/* Card */
-#card-wrap{width:min(300px,46vw,54vh);height:min(420px,64vw,75vh);
+.g-center{display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:10px;padding:12px 6px;
+  width:min(420px,60vw,66vh);}
+#card-wrap{width:min(400px,57vw,62vh);height:min(560px,80vw,87vh);
   border-radius:18px;overflow:hidden;
   box-shadow:0 20px 60px rgba(0,0,0,.65),0 0 0 1px rgba(255,163,0,.1);
   transition:transform .18s ease;flex-shrink:0;}
@@ -169,14 +164,10 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 #card-img{width:100%;height:100%;object-fit:cover;display:block;}
 @keyframes slide-in{from{opacity:0;transform:translateY(-45px) scale(.94);}to{opacity:1;transform:none;}}
 #card-wrap.dealing{animation:slide-in .45s cubic-bezier(.2,1,.3,1) both;}
-
-/* Timer */
 #timer-wrap{width:100%;max-width:280px;height:6px;background:rgba(255,255,255,.08);
   border-radius:3px;overflow:hidden;}
 #timer-bar{height:100%;width:100%;background:var(--gold);transition:width 1s linear,background .5s;}
 #timer-bar.urgent{background:var(--red);animation:timer-pulse 1s ease-in-out infinite;}
-
-/* Guess buttons */
 .g-btns{display:flex;flex-direction:column;gap:8px;width:100%;max-width:160px;margin-top:auto;}
 .g-btn{border:none;border-radius:14px;padding:clamp(10px,2.5vw,16px) 12px;
   font-size:clamp(13px,3vw,17px);font-weight:800;cursor:pointer;
@@ -186,7 +177,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .g-btn:active{transform:scale(.94);}
 .g-btn:disabled{opacity:.3;cursor:not-allowed;transform:none;}
 .g-btn.chosen{box-shadow:0 0 0 3px var(--white),0 0 20px rgba(255,255,255,.3);transform:scale(1.04);}
-
 #g-hi{position:absolute;top:8px;left:50%;transform:translateX(-50%);
   font-size:10px;color:rgba(255,255,255,.3);letter-spacing:1px;white-space:nowrap;}
 
@@ -210,7 +200,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .gd-btn.chosen{box-shadow:0 0 0 3px var(--white),0 0 20px rgba(255,255,255,.3);}
 .gd-status{font-size:13px;color:rgba(255,255,255,.5);text-align:center;}
 
-/* ── RESULT OVERLAY ────────────────────────────── */
+/* ── RESULT OVERLAY ─────────────────────────────────── */
 #result-overlay{position:absolute;inset:0;z-index:50;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:20px;background:rgba(0,0,0,.82);backdrop-filter:blur(6px);
@@ -240,7 +230,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   color:#000;cursor:pointer;font-family:inherit;opacity:0;transition:opacity .3s .4s;}
 #res-next.on{opacity:1;}
 
-/* ── PHONE JOIN ────────────────────────────────── */
+/* ── PHONE JOIN ─────────────────────────────────────── */
 #p-join{gap:20px;text-align:center;}
 .pj-badge{background:rgba(255,163,0,.08);border:1px solid rgba(255,163,0,.2);
   border-radius:10px;padding:8px 18px;font-size:12px;color:var(--gold);
@@ -257,14 +247,14 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   border-radius:14px;padding:16px 40px;font-size:17px;font-weight:800;
   color:#000;cursor:pointer;font-family:inherit;box-shadow:0 6px 24px rgba(255,163,0,.35);}
 
-/* ── PHONE WAIT ────────────────────────────────── */
+/* ── PHONE WAIT ─────────────────────────────────────── */
 #p-wait{gap:20px;text-align:center;}
 .pw-spinner{width:48px;height:48px;border:3px solid rgba(255,163,0,.2);
   border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite;}
 .pw-title{font-size:18px;font-weight:700;color:var(--white);}
 .pw-sub{font-size:13px;color:rgba(255,255,255,.4);}
 
-/* ── PHONE PLAY ────────────────────────────────── */
+/* ── PHONE PLAY ─────────────────────────────────────── */
 #p-play{padding:0;justify-content:stretch;}
 .pp-wrap{width:100%;height:100%;display:flex;flex-direction:column;
   align-items:center;padding:14px 16px 16px;gap:10px;position:relative;overflow:hidden;}
@@ -275,19 +265,17 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .pp-score-val.popping{animation:pop .3s cubic-bezier(.2,2,.3,1);}
 .pp-score.mine .pp-score-name{color:var(--fact);}
 .pp-card-wrap{flex:1;display:flex;align-items:center;justify-content:center;max-height:50vh;}
-#pp-card-wrap{width:min(240px,60vw,38vh);height:min(336px,84vw,53vh);
-  border-radius:14px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.6);
-  transition:transform .18s ease;}
+#pp-card-wrap{width:min(300px,80vw,44vh);height:min(420px,112vw,62vh);
+  border-radius:14px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.6);transition:transform .18s ease;}
 #pp-card-wrap.flip{transform:scaleX(0);}
 #pp-card-img{width:100%;height:100%;object-fit:cover;display:block;}
 #pp-card-wrap.dealing{animation:slide-in .45s cubic-bezier(.2,1,.3,1) both;}
-#pp-timer-wrap{width:100%;max-width:280px;height:5px;background:rgba(255,255,255,.08);
-  border-radius:3px;overflow:hidden;}
+#pp-timer-wrap{width:100%;max-width:280px;height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;}
 #pp-timer-bar{height:100%;width:100%;background:var(--gold);transition:width 1s linear,background .5s;}
 #pp-timer-bar.urgent{background:var(--red);animation:timer-pulse 1s ease-in-out infinite;}
 .pp-btns{display:flex;gap:12px;width:100%;max-width:360px;}
-.pp-btn{flex:1;border:none;border-radius:16px;padding:18px 8px;font-size:clamp(16px,5vw,22px);
-  font-weight:800;cursor:pointer;font-family:inherit;transition:all .15s;}
+.pp-btn{flex:1;border:none;border-radius:16px;padding:18px 8px;
+  font-size:clamp(16px,5vw,22px);font-weight:800;cursor:pointer;font-family:inherit;transition:all .15s;}
 .pp-btn-fact{background:linear-gradient(135deg,#10c0f1,#0899c8);color:#fff;}
 .pp-btn-bluff{background:linear-gradient(135deg,#ff5714,#d63c00);color:#fff;}
 .pp-btn:active{transform:scale(.94);}
@@ -303,7 +291,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .ppr-badge.busted{color:var(--bluff);}
 .ppr-badge.wrong{color:var(--red);}
 .ppr-badge.slam{animation:slam .4s cubic-bezier(.2,2,.3,1);}
-.ppr-delta{font-size:clamp(20px,7vw,36px);font-weight:900;color:var(--white);}
+.ppr-delta{font-size:clamp(20px,7vw,36px);font-weight:900;}
 .ppr-delta.gain{color:var(--green);}
 .ppr-delta.loss{color:var(--red);}
 .ppr-truth{background:rgba(255,163,0,.08);border:1px solid rgba(255,163,0,.2);
@@ -311,9 +299,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   color:rgba(255,255,255,.82);line-height:1.5;max-width:360px;}
 .ppr-wait{font-size:13px;color:rgba(255,255,255,.4);margin-top:4px;}
 
-/* ── GAME OVER ─────────────────────────────────── */
-#gameover{gap:20px;text-align:center;}
-#p-done{gap:20px;text-align:center;}
+/* ── GAME OVER / DONE ───────────────────────────────── */
+#gameover,#p-done{gap:20px;text-align:center;}
 .go-title{font-family:'Playfair Display',serif;font-size:clamp(28px,7vw,56px);
   color:var(--gold);font-weight:900;}
 .go-sub{font-size:13px;color:rgba(255,255,255,.45);letter-spacing:.5px;}
@@ -335,11 +322,10 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .go-play-again{background:linear-gradient(135deg,#ffa300,#ff6600);color:#000;}
 .go-home{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:var(--white);}
 
-/* ── MISC ──────────────────────────────────────── */
-#end-btn{position:fixed;right:0;top:50%;transform:translateY(-50%);
-  z-index:300;display:none;background:rgba(255,50,50,.12);
-  border:1px solid rgba(255,80,80,.25);border-right:none;
-  border-radius:10px 0 0 10px;color:rgba(255,120,120,.7);
+/* ── MISC ───────────────────────────────────────────── */
+#end-btn{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:300;
+  display:none;background:rgba(255,50,50,.12);border:1px solid rgba(255,80,80,.25);
+  border-right:none;border-radius:10px 0 0 10px;color:rgba(255,120,120,.7);
   font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
   padding:12px 8px;cursor:pointer;writing-mode:vertical-rl;font-family:inherit;}
 .sf{position:fixed;font-size:22px;font-weight:900;color:var(--green);
@@ -348,8 +334,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .cp{position:fixed;top:-10px;pointer-events:none;z-index:500;animation:fall linear forwards;}
 #flash{position:fixed;inset:0;z-index:600;pointer-events:none;opacity:0;}
 
-/* ── ANIMATIONS ────────────────────────────────── */
-@keyframes glow{0%,100%{filter:drop-shadow(0 0 14px rgba(255,163,0,.4));}50%{filter:drop-shadow(0 0 28px rgba(255,163,0,.8));}}
+/* ── KEYFRAMES ──────────────────────────────────────── */
 @keyframes pulse{0%,100%{opacity:.45;}50%{opacity:.85;}}
 @keyframes pop{0%{transform:scale(1);}40%{transform:scale(1.25);}100%{transform:scale(1);}}
 @keyframes slam{0%{transform:scale(3) rotate(-6deg);opacity:0;}60%{transform:scale(.95) rotate(1deg);}100%{transform:scale(1) rotate(0);opacity:1;}}
@@ -361,10 +346,10 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 </head>
 <body>
 
-<!-- HOST SCREENS -->
+<!-- ═══ HOST SCREENS ═══ -->
 <div id="attract" class="screen" onclick="onAttractTap()">
   <img class="a-logo"
-    src="https://raw.githubusercontent.com/ITSMalta/Playing-Cards/main/ITS_logo.png"
+    src="https://raw.githubusercontent.com/ITSMalta/Playing-Cards/main/logo_bg.png"
     onerror="this.style.display='none'" alt="ITS">
   <div class="a-title"><span class="fact">FACT</span> or <span class="bluff">BLUFF</span>?</div>
   <div class="a-sub">ITS Malta Edition</div>
@@ -436,7 +421,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   <button class="back-btn" onclick="show('mode-select')">← Back</button>
 </div>
 
-<!-- GAME SCREEN -->
+<!-- ═══ GAME ═══ -->
 <div id="game" class="screen off">
   <div id="g-single" class="g-split" style="display:none;width:100%;height:100%">
     <div class="g-panel p0" id="g-panel0">
@@ -502,7 +487,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   </div>
 </div>
 
-<!-- PHONE SCREENS -->
+<!-- ═══ PHONE SCREENS ═══ -->
 <div id="p-join" class="screen off">
   <div class="pj-badge" id="pj-badge">Joining Session</div>
   <div class="pj-title">ITS Fact or Bluff</div>
@@ -547,13 +532,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 <div id="flash"></div>
 
 <script>
-// ═══════════════════════════════════════════════════════
-//  ITS FACT OR BLUFF — complete game script
-// ═══════════════════════════════════════════════════════
-
-const BASE = 'https://raw.githubusercontent.com/ITSMalta/Playing-Cards/main/';
-
-const FB_CFG = {
+const BASE='https://raw.githubusercontent.com/ITSMalta/Playing-Cards/main/';
+const FB_CFG={
   apiKey:"AIzaSyC3hwSvOmNQw5_MI7gR95LLbhz5lNEMo-M",
   authDomain:"its-factorbluff.firebaseapp.com",
   databaseURL:"https://its-factorbluff-default-rtdb.europe-west1.firebasedatabase.app",
@@ -563,609 +543,394 @@ const FB_CFG = {
   appId:"1:710556896090:web:a35ded436ca94f89e78163"
 };
 
-// ── All 30 cards — exact Ambassador Reference text ─────
-const CARDS = [
-  {n:1,  f:'01_face_fact.png',  t:'fact',  r:"FACT ✓ — Founded in 1987, ITS is one of Malta's longest-standing specialist higher education institutions."},
-  {n:2,  f:'02_face_fact.png',  t:'fact',  r:"FACT ✓ — ITS offers programmes from MQF Level 2 (Foundation) right up to MQF Level 7 (Master's degree)."},
-  {n:3,  f:'03_face_bluff.png', t:'bluff', r:"BLUFF ✗ — ITS has two campuses — one in Luqa, near Malta International Airport, and another in Qala, Gozo."},
-  {n:4,  f:'04_face_fact.png',  t:'fact',  r:"FACT ✓ — ITS operates a satellite campus in Shanghai, China."},
-  {n:5,  f:'05_face_bluff.png', t:'bluff', r:"BLUFF ✗ — ITS is accredited by THE-ICE — the International Centre of Excellence in Tourism and Hospitality Education."},
-  {n:6,  f:'06_face_fact.png',  t:'fact',  r:"FACT ✓ — Chef Andrew Farrugia, ITS lecturer created the world's longest chocolate sculpture — 55.27m — in Milan, January 2026."},
-  {n:7,  f:'07_face_bluff.png', t:'bluff', r:"BLUFF ✗ — The sculpture was made from 3,000kg of Belgian chocolate across one locomotive and F22 carriages."},
-  {n:8,  f:'08_face_fact.png',  t:'fact',  r:"FACT ✓ — The Bachelor of Science in Diving Safety Management is first in the world, launched in partnership with Dan Europe Foundation and is offered at the Gozo campus."},
-  {n:9,  f:'09_face_bluff.png', t:'bluff', r:"BLUFF ✗ — ITS offers programmes across culinary arts, events, rooms division, food & beverage, travel, heritage interpretation, tourist guiding, diving, spa & wellness, climate-friendly travel and more."},
-  {n:10, f:'10_face_fact.png',  t:'fact',  r:"FACT ✓ — The Master of Arts in Heritage Interpretation is one of ITS's postgraduate offerings."},
-  {n:11, f:'11_face_bluff.png', t:'bluff', r:"BLUFF ✗ — ITS offers a Master in Business Administration in International Hospitality Management."},
-  {n:12, f:'12_face_fact.png',  t:'fact',  r:"FACT ✓ — The Bachelor in International Hospitality Management offers specialisations in Spa & Wellness, Finance, Food & Beverage, and Human Resources."},
-  {n:13, f:'13_face_bluff.png', t:'bluff', r:"BLUFF ✗ — The Gozo campus is located in Qala, not Victoria."},
-  {n:14, f:'14_face_fact.png',  t:'fact',  r:"FACT ✓ — The Diploma in Climate Friendly Travel reflects ITS's commitment to sustainable tourism education."},
-  {n:15, f:'15_face_bluff.png', t:'bluff', r:"BLUFF ✗ — ITS students have access to internship placements both locally and internationally."},
-  {n:16, f:'16_face_fact.png',  t:'fact',  r:"FACT ✓ — Tourism consistently accounts for over a quarter of Malta's national GDP."},
-  {n:17, f:'17_face_bluff.png', t:'bluff', r:"BLUFF ✗ — ITS offers Foundation programmes for students at different starting points, with multiple entry pathways including Recognition of Prior Learning."},
-  {n:18, f:'18_face_fact.png',  t:'fact',  r:"FACT ✓ — The Higher National Diploma in Tourist Guiding is a specialist programme unique to ITS."},
-  {n:19, f:'19_face_bluff.png', t:'bluff', r:"BLUFF ✗ — Tourism and hospitality accounts for roughly 1 in 10 jobs worldwide — one of the largest employment sectors globally."},
-  {n:20, f:'20_face_fact.png',  t:'fact',  r:"FACT ✓ — ITS operates training restaurants open to the public, where students gain real service experience in a live professional environment."},
-  {n:21, f:'21_face_bluff.png', t:'bluff', r:"BLUFF ✗ — ITS holds THE-ICE accreditation, giving its qualifications international recognition."},
-  {n:22, f:'22_face_fact.png',  t:'fact',  r:"FACT ✓ — ITS offers Events programmes at Certificate, Diploma, and Undergraduate Diploma level."},
-  {n:23, f:'23_face_bluff.png', t:'bluff', r:"BLUFF ✗ — Malta regularly receives well over two million tourist arrivals per year."},
-  {n:24, f:'24_face_fact.png',  t:'fact',  r:"FACT ✓ — ITS has a dedicated Food Science Lab on campus, supporting its culinary and food preparation programmes."},
-  {n:25, f:'25_face_fact.png',  t:'fact',  r:"FACT ✓ — The BSc in Diving Safety Management is the first degree of its kind globally. Confirmed by DAN Europe and DIVE Magazine."},
-  {n:26, f:'26_face_fact.png',  t:'fact',  r:"FACT ✓ — ITS has an active Erasmus programme giving students access to international study experiences across Europe."},
-  {n:27, f:'27_face_bluff.png', t:'bluff', r:"BLUFF ✗ — ITS trains students for kitchens, bars, dive operations, event production, travel consultancy, heritage tourism, spa management, and executive hospitality leadership."},
-  {n:28, f:'28_face_fact.png',  t:'fact',  r:"FACT ✓ — ITS's specialist facilities include a Wine Lab and Bar Lab."},
-  {n:29, f:'29_face_bluff.png', t:'bluff', r:"BLUFF ✗ — The World Tourism Organisation projects long-term growth in international arrivals — technology is enhancing, not replacing, human hospitality roles."},
-  {n:30, f:'30_face_fact.png',  t:'fact',  r:"FACT ✓ — ITS highlights strong employability rates — a direct result of its work-based learning and internship model."}
+const CARDS=[
+  {n:1, f:'01_face_fact.png', t:'fact', r:"FACT ✓ — Founded in 1987, ITS is one of Malta's longest-standing specialist higher education institutions."},
+  {n:2, f:'02_face_fact.png', t:'fact', r:"FACT ✓ — ITS offers programmes from MQF Level 2 (Foundation) right up to MQF Level 7 (Master's degree)."},
+  {n:3, f:'03_face_bluff.png',t:'bluff',r:"BLUFF ✗ — ITS has two campuses — one in Luqa, near Malta International Airport, and another in Qala, Gozo."},
+  {n:4, f:'04_face_fact.png', t:'fact', r:"FACT ✓ — ITS operates a satellite campus in Shanghai, China."},
+  {n:5, f:'05_face_bluff.png',t:'bluff',r:"BLUFF ✗ — ITS is accredited by THE-ICE — the International Centre of Excellence in Tourism and Hospitality Education."},
+  {n:6, f:'06_face_fact.png', t:'fact', r:"FACT ✓ — Chef Andrew Farrugia, ITS lecturer created the world's longest chocolate sculpture — 55.27m — in Milan, January 2026."},
+  {n:7, f:'07_face_bluff.png',t:'bluff',r:"BLUFF ✗ — The sculpture was made from 3,000kg of Belgian chocolate across one locomotive and F22 carriages."},
+  {n:8, f:'08_face_fact.png', t:'fact', r:"FACT ✓ — The Bachelor of Science in Diving Safety Management is first in the world, launched in partnership with Dan Europe Foundation and is offered at the Gozo campus."},
+  {n:9, f:'09_face_bluff.png',t:'bluff',r:"BLUFF ✗ — ITS offers programmes across culinary arts, events, rooms division, food & beverage, travel, heritage interpretation, tourist guiding, diving, spa & wellness, climate-friendly travel and more."},
+  {n:10,f:'10_face_fact.png', t:'fact', r:"FACT ✓ — The Master of Arts in Heritage Interpretation is one of ITS's postgraduate offerings."},
+  {n:11,f:'11_face_bluff.png',t:'bluff',r:"BLUFF ✗ — ITS offers a Master in Business Administration in International Hospitality Management."},
+  {n:12,f:'12_face_fact.png', t:'fact', r:"FACT ✓ — The Bachelor in International Hospitality Management offers specialisations in Spa & Wellness, Finance, Food & Beverage, and Human Resources."},
+  {n:13,f:'13_face_bluff.png',t:'bluff',r:"BLUFF ✗ — The Gozo campus is located in Qala, not Victoria."},
+  {n:14,f:'14_face_fact.png', t:'fact', r:"FACT ✓ — The Diploma in Climate Friendly Travel reflects ITS's commitment to sustainable tourism education."},
+  {n:15,f:'15_face_bluff.png',t:'bluff',r:"BLUFF ✗ — ITS students have access to internship placements both locally and internationally."},
+  {n:16,f:'16_face_fact.png', t:'fact', r:"FACT ✓ — Tourism consistently accounts for over a quarter of Malta's national GDP."},
+  {n:17,f:'17_face_bluff.png',t:'bluff',r:"BLUFF ✗ — ITS offers Foundation programmes for students at different starting points, with multiple entry pathways including Recognition of Prior Learning."},
+  {n:18,f:'18_face_fact.png', t:'fact', r:"FACT ✓ — The Higher National Diploma in Tourist Guiding is a specialist programme unique to ITS."},
+  {n:19,f:'19_face_bluff.png',t:'bluff',r:"BLUFF ✗ — Tourism and hospitality accounts for roughly 1 in 10 jobs worldwide — one of the largest employment sectors globally."},
+  {n:20,f:'20_face_fact.png', t:'fact', r:"FACT ✓ — ITS operates training restaurants open to the public, where students gain real service experience in a live professional environment."},
+  {n:21,f:'21_face_bluff.png',t:'bluff',r:"BLUFF ✗ — ITS holds THE-ICE accreditation, giving its qualifications international recognition."},
+  {n:22,f:'22_face_fact.png', t:'fact', r:"FACT ✓ — ITS offers Events programmes at Certificate, Diploma, and Undergraduate Diploma level."},
+  {n:23,f:'23_face_bluff.png',t:'bluff',r:"BLUFF ✗ — Malta regularly receives well over two million tourist arrivals per year."},
+  {n:24,f:'24_face_fact.png', t:'fact', r:"FACT ✓ — ITS has a dedicated Food Science Lab on campus, supporting its culinary and food preparation programmes."},
+  {n:25,f:'25_face_fact.png', t:'fact', r:"FACT ✓ — The BSc in Diving Safety Management is the first degree of its kind globally. Confirmed by DAN Europe and DIVE Magazine."},
+  {n:26,f:'26_face_fact.png', t:'fact', r:"FACT ✓ — ITS has an active Erasmus programme giving students access to international study experiences across Europe."},
+  {n:27,f:'27_face_bluff.png',t:'bluff',r:"BLUFF ✗ — ITS trains students for kitchens, bars, dive operations, event production, travel consultancy, heritage tourism, spa management, and executive hospitality leadership."},
+  {n:28,f:'28_face_fact.png', t:'fact', r:"FACT ✓ — ITS's specialist facilities include a Wine Lab and Bar Lab."},
+  {n:29,f:'29_face_bluff.png',t:'bluff',r:"BLUFF ✗ — The World Tourism Organisation projects long-term growth in international arrivals — technology is enhancing, not replacing, human hospitality roles."},
+  {n:30,f:'30_face_fact.png', t:'fact', r:"FACT ✓ — ITS highlights strong employability rates — a direct result of its work-based learning and internship model."}
 ];
 
-// ── State ──────────────────────────────────────────────
-let mode         = 'single';
-let nPlayers     = 1;
-let scores       = [0, 0];
-let streaks      = [0, 0];
-let deck         = [];
-let cardIdx      = 0;
-let timerInt     = null;
-let timerSecs    = 15;
-let guesses      = [null, null];
-let db           = null;
-let sessionId    = null;
-let phoneMode    = false;
-let phoneGuessed = false;
+let mode='single',nPlayers=1,scores=[0,0],streaks=[0,0],deck=[],cardIdx=0,
+    timerInt=null,timerSecs=15,guesses=[null,null],
+    db=null,sessionId=null,phoneMode=false,phoneGuessed=false;
 
-// ── Boot ───────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded', () => {
-  const params  = new URLSearchParams(location.search);
-  const joinSid = params.get('join');
-  firebase.initializeApp(FB_CFG);
-  db = firebase.database();
-  if (joinSid) { phoneMode = true; sessionId = joinSid; initPhoneMode(joinSid); }
-  else { initHostMode(); }
+window.addEventListener('DOMContentLoaded',()=>{
+  const params=new URLSearchParams(location.search),joinSid=params.get('join');
+  firebase.initializeApp(FB_CFG); db=firebase.database();
+  if(joinSid){phoneMode=true;sessionId=joinSid;initPhoneMode(joinSid);}
+  else{initHostMode();}
 });
 
-// ═══════════════════════════════════════════════════════
-//  HOST MODE
-// ═══════════════════════════════════════════════════════
-function initHostMode() {
-  show('attract');
-  setTimeout(buildAttractQR, 250);
+function initHostMode(){show('attract');setTimeout(buildAttractQR,250);}
+
+function buildAttractQR(){
+  const el=document.getElementById('a-qr');if(!el)return;
+  el.innerHTML='';
+  if(location.protocol==='file:'){const w=document.getElementById('a-qr-wrap');if(w)w.style.display='none';return;}
+  const url=location.origin+location.pathname;
+  try{new QRCode(el,{text:url,width:110,height:110,colorDark:'#000000',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});}
+  catch(e){el.style.display='none';}
 }
 
-function buildAttractQR() {
-  const el = document.getElementById('a-qr');
-  if (!el) return;
-  el.innerHTML = '';
-  if (location.protocol === 'file:') {
-    const wrap = document.getElementById('a-qr-wrap');
-    if (wrap) wrap.style.display = 'none';
-    return;
-  }
-  const url = location.origin + location.pathname;
-  try {
-    new QRCode(el, { text: url, width: 110, height: 110,
-      colorDark: '#000000', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M });
-  } catch(e) { el.style.display = 'none'; }
+function onAttractTap(){show('mode-select');}
+function pickMode(m){mode=m;show(m==='single'?'s-setup':'d-setup');}
+
+function setNPlayers(n){
+  nPlayers=n;
+  document.getElementById('btn1p').classList.toggle('active',n===1);
+  document.getElementById('btn2p').classList.toggle('active',n===2);
+  document.getElementById('name-box1').style.display=n===2?'':'none';
 }
 
-function onAttractTap() { show('mode-select'); }
-
-function pickMode(m) {
-  mode = m;
-  show(m === 'single' ? 's-setup' : 'd-setup');
+function startSingle(){
+  const n0=document.getElementById('name0').value.trim()||'Player 1';
+  const n1=nPlayers>1?(document.getElementById('name1').value.trim()||'Player 2'):'';
+  scores=[0,0];streaks=[0,0];deck=shuffle([...CARDS]);cardIdx=0;
+  document.getElementById('pname0').textContent=n0;
+  document.getElementById('pname1').textContent=n1;
+  document.getElementById('pscore0').textContent='0';
+  document.getElementById('pscore1').textContent='0';
+  document.getElementById('combo0').textContent='';
+  document.getElementById('combo1').textContent='';
+  document.getElementById('g-panel1').style.display=nPlayers===1?'none':'';
+  document.getElementById('g-single').style.display='grid';
+  document.getElementById('g-dist').style.display='none';
+  document.getElementById('end-btn').style.display='block';
+  show('game');dealCard();
 }
 
-// ── Single setup ───────────────────────────────────────
-function setNPlayers(n) {
-  nPlayers = n;
-  document.getElementById('btn1p').classList.toggle('active', n === 1);
-  document.getElementById('btn2p').classList.toggle('active', n === 2);
-  document.getElementById('name-box1').style.display = n === 2 ? '' : 'none';
-}
-
-function startSingle() {
-  const n0 = document.getElementById('name0').value.trim() || 'Player 1';
-  const n1 = nPlayers > 1 ? (document.getElementById('name1').value.trim() || 'Player 2') : '';
-  scores = [0,0]; streaks = [0,0];
-  deck = shuffle([...CARDS]); cardIdx = 0;
-
-  document.getElementById('pname0').textContent  = n0;
-  document.getElementById('pname1').textContent  = n1;
-  document.getElementById('pscore0').textContent = '0';
-  document.getElementById('pscore1').textContent = '0';
-  document.getElementById('combo0').textContent  = '';
-  document.getElementById('combo1').textContent  = '';
-  document.getElementById('g-panel1').style.display = nPlayers === 1 ? 'none' : '';
-  document.getElementById('g-single').style.display = 'flex';
-  document.getElementById('g-dist').style.display   = 'none';
-  document.getElementById('end-btn').style.display  = 'block';
-  show('game');
-  dealCard();
-}
-
-// ── Distributed setup ──────────────────────────────────
-function createDistSession() {
-  const name = document.getElementById('dname0').value.trim() || 'Host';
-  const sid  = randCode(6);
-  sessionId  = sid;
-  const waiting = document.getElementById('ds-waiting');
-  waiting.style.display = 'flex';
-  document.getElementById('ds-code-display').textContent = sid;
-
-  db.ref('sessions/' + sid).set({
-    phase:'lobby', host:name, cardIndex:-1,
-    cardFace:'', cardReveal:'', cardType:'', result:null,
-    players:{
-      p0:{name, score:0, guess:''},
-      p1:{name:'', score:0, guess:''}
-    }
-  });
-
-  setTimeout(() => buildDistQR(sid), 200);
-
-  db.ref('sessions/' + sid + '/players/p1/name').on('value', snap => {
-    const p1name = snap.val();
-    if (p1name && p1name.length > 0) {
-      const st = document.getElementById('ds-status');
-      st.textContent = p1name + ' has joined!';
-      st.classList.add('joined');
-      document.getElementById('ds-start-btn').style.display = '';
-      renderLobbyPlayers(name, p1name);
+function createDistSession(){
+  const name=document.getElementById('dname0').value.trim()||'Host';
+  const sid=randCode(6);sessionId=sid;
+  document.getElementById('ds-waiting').style.display='flex';
+  document.getElementById('ds-code-display').textContent=sid;
+  db.ref('sessions/'+sid).set({phase:'lobby',host:name,cardIndex:-1,
+    cardFace:'',cardReveal:'',cardType:'',result:null,
+    players:{p0:{name,score:0,guess:''},p1:{name:'',score:0,guess:''}}});
+  setTimeout(()=>buildDistQR(sid),200);
+  db.ref('sessions/'+sid+'/players/p1/name').on('value',snap=>{
+    const p1=snap.val();
+    if(p1&&p1.length>0){
+      const st=document.getElementById('ds-status');
+      st.textContent=p1+' has joined!';st.classList.add('joined');
+      document.getElementById('ds-start-btn').style.display='';
+      renderLobbyPlayers(name,p1);
     }
   });
 }
 
-function buildDistQR(sid) {
-  const el = document.getElementById('ds-qr');
-  if (!el) return;
-  el.innerHTML = '';
-  if (location.protocol === 'file:') {
-    el.innerHTML = '<div style="padding:10px;font-size:12px;color:#333;text-align:center;font-weight:700">Deploy to GitHub Pages<br>to enable QR scanning.<br><br>Share code: <span style="font-size:20px;color:#e67e00;letter-spacing:3px">' + sid + '</span></div>';
+function buildDistQR(sid){
+  const el=document.getElementById('ds-qr');if(!el)return;
+  el.innerHTML='';
+  if(location.protocol==='file:'){
+    el.innerHTML='<div style="padding:10px;font-size:12px;color:#333;text-align:center;font-weight:700">Deploy to GitHub Pages<br>to enable QR scanning.<br><br>Share code:<br><span style="font-size:20px;color:#e67e00;letter-spacing:3px">'+sid+'</span></div>';
     return;
   }
-  const joinUrl = location.origin + location.pathname + '?join=' + sid;
-  try {
-    new QRCode(el, { text: joinUrl, width: 140, height: 140,
-      colorDark: '#000000', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M });
-  } catch(e) { el.textContent = joinUrl; }
+  const url=location.origin+location.pathname+'?join='+sid;
+  try{new QRCode(el,{text:url,width:140,height:140,colorDark:'#000000',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});}
+  catch(e){el.textContent=url;}
 }
 
-function renderLobbyPlayers(h, g) {
-  document.getElementById('ds-players').innerHTML =
+function renderLobbyPlayers(h,g){
+  document.getElementById('ds-players').innerHTML=
     `<div class="ds-player ready"><div class="ds-player-name">${esc(h)}</div><div>Host ✓</div></div>
      <div class="ds-player ready"><div class="ds-player-name">${esc(g)}</div><div>Joined ✓</div></div>`;
 }
 
-function startDist() {
-  scores=[0,0]; streaks=[0,0];
-  deck = shuffle([...CARDS]); cardIdx = 0;
-  document.getElementById('g-single').style.display = 'none';
-  document.getElementById('g-dist').style.display   = 'flex';
-  document.getElementById('end-btn').style.display  = 'block';
-
-  db.ref('sessions/' + sessionId + '/players').once('value', snap => {
-    const ps = snap.val() || {};
-    renderDistScores(ps.p0?.name||'Host', ps.p1?.name||'Guest');
-    db.ref('sessions/' + sessionId + '/phase').set('playing');
-    show('game');
-    dealCardDist();
+function startDist(){
+  scores=[0,0];streaks=[0,0];deck=shuffle([...CARDS]);cardIdx=0;
+  document.getElementById('g-single').style.display='none';
+  document.getElementById('g-dist').style.display='flex';
+  document.getElementById('end-btn').style.display='block';
+  db.ref('sessions/'+sessionId+'/players').once('value',snap=>{
+    const ps=snap.val()||{};
+    renderDistScores(ps.p0?.name||'Host',ps.p1?.name||'Guest');
+    db.ref('sessions/'+sessionId+'/phase').set('playing');
+    show('game');dealCardDist();
   });
 }
 
-function renderDistScores(n0, n1) {
-  document.getElementById('gd-scores').innerHTML =
-    `<div class="gd-score-box">
-       <div class="gd-sname">${esc(n0)}</div>
-       <div class="gd-sval" id="gds-val-0">0</div>
-       <div class="gd-combo" id="gds-combo-0"></div>
-     </div>
-     <div class="gd-score-box">
-       <div class="gd-sname">${esc(n1)}</div>
-       <div class="gd-sval" id="gds-val-1">0</div>
-       <div class="gd-combo" id="gds-combo-1"></div>
-     </div>`;
+function renderDistScores(n0,n1){
+  document.getElementById('gd-scores').innerHTML=
+    `<div class="gd-score-box"><div class="gd-sname">${esc(n0)}</div><div class="gd-sval" id="gds-val-0">0</div><div class="gd-combo" id="gds-combo-0"></div></div>
+     <div class="gd-score-box"><div class="gd-sname">${esc(n1)}</div><div class="gd-sval" id="gds-val-1">0</div><div class="gd-combo" id="gds-combo-1"></div></div>`;
 }
 
-// ═══════════════════════════════════════════════════════
-//  CARD LOGIC
-// ═══════════════════════════════════════════════════════
-function dealCard() {
-  if (cardIdx >= deck.length) { forceEndGame(); return; }
-  guesses = [null, null];
-  const card = deck[cardIdx];
-  for (let p = 0; p < 2; p++) {
-    const f = document.getElementById('p'+p+'-fact');
-    const b = document.getElementById('p'+p+'-bluff');
-    if (f) { f.disabled=false; f.classList.remove('chosen'); }
-    if (b) { b.disabled=false; b.classList.remove('chosen'); }
+function dealCard(){
+  if(cardIdx>=deck.length){forceEndGame();return;}
+  guesses=[null,null];const card=deck[cardIdx];
+  for(let p=0;p<2;p++){
+    const f=document.getElementById('p'+p+'-fact'),b=document.getElementById('p'+p+'-bluff');
+    if(f){f.disabled=false;f.classList.remove('chosen');}
+    if(b){b.disabled=false;b.classList.remove('chosen');}
   }
-  const wrap = document.getElementById('card-wrap');
-  const img  = document.getElementById('card-img');
-  wrap.classList.remove('dealing');
-  wrap.classList.add('flip');
-  setTimeout(() => {
-    img.src = BASE + card.f;
-    wrap.classList.remove('flip');
-    wrap.classList.add('dealing');
-    setTimeout(() => wrap.classList.remove('dealing'), 460);
-  }, 190);
-  hideResult(); startTimer(); updateHiScore();
+  const wrap=document.getElementById('card-wrap'),img=document.getElementById('card-img');
+  wrap.classList.remove('dealing');wrap.classList.add('flip');
+  setTimeout(()=>{img.src=BASE+card.f;wrap.classList.remove('flip');wrap.classList.add('dealing');setTimeout(()=>wrap.classList.remove('dealing'),460);},190);
+  hideResult();startTimer();updateHiScore();
 }
 
-function dealCardDist() {
-  if (cardIdx >= deck.length) { forceEndGame(); return; }
-  guesses = [null, null];
-  const card = deck[cardIdx];
-  const wrap = document.getElementById('card-wrap-d');
-  const img  = document.getElementById('card-img-d');
-  if (wrap) {
-    wrap.style.transform = 'scaleX(0)';
-    setTimeout(() => { img.src = BASE + card.f; wrap.style.transform = ''; }, 190);
-  }
+function dealCardDist(){
+  if(cardIdx>=deck.length){forceEndGame();return;}
+  guesses=[null,null];const card=deck[cardIdx];
+  const wrap=document.getElementById('card-wrap-d'),img=document.getElementById('card-img-d');
+  if(wrap){wrap.style.transform='scaleX(0)';setTimeout(()=>{img.src=BASE+card.f;wrap.style.transform='';},190);}
   hideResult();
-  db.ref('sessions/' + sessionId).update({
-    phase:'playing', cardIndex:cardIdx,
-    cardFace:card.f, cardReveal:card.r, cardType:card.t, result:null
-  });
-  db.ref('sessions/' + sessionId + '/players/p0/guess').set('');
-  db.ref('sessions/' + sessionId + '/players/p1/guess').set('');
-  startTimerDist();
-  document.getElementById('gd-status').textContent = 'Waiting for guesses…';
-  updateHiScore();
+  db.ref('sessions/'+sessionId).update({phase:'playing',cardIndex:cardIdx,cardFace:card.f,cardReveal:card.r,cardType:card.t,result:null});
+  db.ref('sessions/'+sessionId+'/players/p0/guess').set('');
+  db.ref('sessions/'+sessionId+'/players/p1/guess').set('');
+  startTimerDist();document.getElementById('gd-status').textContent='Waiting for guesses…';updateHiScore();
 }
 
-// ── Guessing ───────────────────────────────────────────
-function guess(playerIdx, choice) {
-  if (guesses[playerIdx]) return;
-  guesses[playerIdx] = choice;
-  const f = document.getElementById('p'+playerIdx+'-fact');
-  const b = document.getElementById('p'+playerIdx+'-bluff');
-  f.disabled=true; b.disabled=true;
-  (choice==='fact'?f:b).classList.add('chosen');
-  const done = guesses.slice(0, nPlayers).every(g => g !== null);
-  if (done) { stopTimer(); judgeRound(); }
+function guess(pi,choice){
+  if(guesses[pi])return;guesses[pi]=choice;
+  const f=document.getElementById('p'+pi+'-fact'),b=document.getElementById('p'+pi+'-bluff');
+  f.disabled=true;b.disabled=true;(choice==='fact'?f:b).classList.add('chosen');
+  if(guesses.slice(0,nPlayers).every(g=>g!==null)){stopTimer();judgeRound();}
 }
 
-// ── Timers ─────────────────────────────────────────────
-function startTimer() {
-  timerSecs = 15; clearInterval(timerInt);
-  const bar = document.getElementById('timer-bar');
-  if (bar) { bar.style.width='100%'; bar.style.background='var(--gold)'; bar.classList.remove('urgent'); bar.style.transition='width 1s linear,background .5s'; }
-  timerInt = setInterval(() => {
+function startTimer(){
+  timerSecs=15;clearInterval(timerInt);
+  const bar=document.getElementById('timer-bar');
+  if(bar){bar.style.width='100%';bar.style.background='var(--gold)';bar.classList.remove('urgent');bar.style.transition='width 1s linear,background .5s';}
+  timerInt=setInterval(()=>{
     timerSecs--;
-    const pct = (timerSecs/15)*100;
-    if (bar) { bar.style.width=pct+'%'; if (timerSecs<=5) bar.classList.add('urgent'); }
-    if (timerSecs<=0) {
-      clearInterval(timerInt);
-      if (!guesses[0]) guesses[0]='__timeout__';
-      if (nPlayers>1 && !guesses[1]) guesses[1]='__timeout__';
-      judgeRound();
-    }
-  }, 1000);
+    if(bar){bar.style.width=(timerSecs/15*100)+'%';if(timerSecs<=5)bar.classList.add('urgent');}
+    if(timerSecs<=0){clearInterval(timerInt);if(!guesses[0])guesses[0]='__timeout__';if(nPlayers>1&&!guesses[1])guesses[1]='__timeout__';judgeRound();}
+  },1000);
 }
 
-function startTimerDist() {
-  timerSecs = 15; clearInterval(timerInt);
-  const bar = document.getElementById('timer-bar-d');
-  if (bar) { bar.style.width='100%'; bar.style.background='var(--gold)'; bar.classList.remove('urgent'); bar.style.transition='width 1s linear,background .5s'; }
-  timerInt = setInterval(() => {
+function startTimerDist(){
+  timerSecs=15;clearInterval(timerInt);
+  const bar=document.getElementById('timer-bar-d');
+  if(bar){bar.style.width='100%';bar.style.background='var(--gold)';bar.classList.remove('urgent');bar.style.transition='width 1s linear,background .5s';}
+  timerInt=setInterval(()=>{
     timerSecs--;
-    const pct = (timerSecs/15)*100;
-    if (bar) { bar.style.width=pct+'%'; if (timerSecs<=5) bar.classList.add('urgent'); }
-    if (timerSecs<=0) { clearInterval(timerInt); judgeRoundDist(true); }
-  }, 1000);
+    if(bar){bar.style.width=(timerSecs/15*100)+'%';if(timerSecs<=5)bar.classList.add('urgent');}
+    if(timerSecs<=0){clearInterval(timerInt);judgeRoundDist(true);}
+  },1000);
 }
 
-function stopTimer() {
-  clearInterval(timerInt);
-  const bar  = document.getElementById('timer-bar');
-  const bard = document.getElementById('timer-bar-d');
-  if (bar)  bar.style.transition  = 'none';
-  if (bard) bard.style.transition = 'none';
-}
+function stopTimer(){clearInterval(timerInt);const b=document.getElementById('timer-bar'),d=document.getElementById('timer-bar-d');if(b)b.style.transition='none';if(d)d.style.transition='none';}
 
-// ── Judge ──────────────────────────────────────────────
-function judgeRound() {
-  const card = deck[cardIdx];
-  const deltas = [0,0];
-  for (let p=0; p<nPlayers; p++) {
-    deltas[p] = computeDelta(guesses[p], card, p);
-    scores[p] += deltas[p]; if (scores[p]<0) scores[p]=0;
-    const el = document.getElementById('pscore'+p);
-    if (el) { el.textContent=scores[p]; el.classList.remove('popping'); void el.offsetWidth; if(deltas[p]) el.classList.add('popping'); }
-    const cb = document.getElementById('combo'+p);
-    if (cb) cb.textContent = comboLabel(streaks[p]);
-    if (deltas[p]!==0) floatScore(deltas[p], p===0?0.25:0.75);
+function judgeRound(){
+  const card=deck[cardIdx],deltas=[0,0];
+  for(let p=0;p<nPlayers;p++){
+    deltas[p]=computeDelta(guesses[p],card,p);scores[p]+=deltas[p];if(scores[p]<0)scores[p]=0;
+    const el=document.getElementById('pscore'+p);if(el){el.textContent=scores[p];el.classList.remove('popping');void el.offsetWidth;if(deltas[p])el.classList.add('popping');}
+    const cb=document.getElementById('combo'+p);if(cb)cb.textContent=comboLabel(streaks[p]);
+    if(deltas[p]!==0)floatScore(deltas[p],p===0?0.25:0.75);
   }
-  saveLeaderboard(); showResult(card, guesses, deltas); cardIdx++;
+  saveLeaderboard();showResult(card,guesses,deltas);cardIdx++;
 }
 
-function judgeRoundDist(timeout) {
-  const card   = deck[cardIdx];
-  const delta0 = computeDelta(guesses[0], card, 0);
-  const delta1 = computeDelta(guesses[1], card, 1);
-  scores[0]+=delta0; if(scores[0]<0) scores[0]=0;
-  scores[1]+=delta1; if(scores[1]<0) scores[1]=0;
-  const v0=document.getElementById('gds-val-0'), v1=document.getElementById('gds-val-1');
-  if (v0) { v0.textContent=scores[0]; v0.classList.remove('popping'); void v0.offsetWidth; if(delta0) v0.classList.add('popping'); }
-  if (v1) { v1.textContent=scores[1]; v1.classList.remove('popping'); void v1.offsetWidth; if(delta1) v1.classList.add('popping'); }
-  const c0=document.getElementById('gds-combo-0'), c1=document.getElementById('gds-combo-1');
-  if (c0) c0.textContent=comboLabel(streaks[0]);
-  if (c1) c1.textContent=comboLabel(streaks[1]);
-  db.ref('sessions/'+sessionId+'/result').set({
-    cardType:card.t, reveal:card.r,
-    score0:scores[0], delta0, score1:scores[1], delta1,
-    streak0:streaks[0], streak1:streaks[1]
-  });
-  saveLeaderboard(); showResult(card, guesses, [delta0,delta1]); cardIdx++;
+function judgeRoundDist(){
+  const card=deck[cardIdx],d0=computeDelta(guesses[0],card,0),d1=computeDelta(guesses[1],card,1);
+  scores[0]+=d0;if(scores[0]<0)scores[0]=0;scores[1]+=d1;if(scores[1]<0)scores[1]=0;
+  const v0=document.getElementById('gds-val-0'),v1=document.getElementById('gds-val-1');
+  if(v0){v0.textContent=scores[0];v0.classList.remove('popping');void v0.offsetWidth;if(d0)v0.classList.add('popping');}
+  if(v1){v1.textContent=scores[1];v1.classList.remove('popping');void v1.offsetWidth;if(d1)v1.classList.add('popping');}
+  const c0=document.getElementById('gds-combo-0'),c1=document.getElementById('gds-combo-1');
+  if(c0)c0.textContent=comboLabel(streaks[0]);if(c1)c1.textContent=comboLabel(streaks[1]);
+  db.ref('sessions/'+sessionId+'/result').set({cardType:card.t,reveal:card.r,score0:scores[0],delta0:d0,score1:scores[1],delta1:d1,streak0:streaks[0],streak1:streaks[1]});
+  saveLeaderboard();showResult(card,guesses,[d0,d1]);cardIdx++;
 }
 
-function computeDelta(g, card, pIdx) {
-  if (!g || g==='__timeout__') return 0;
-  if (g===card.t) { const pts=card.t==='bluff'?200:100; const mult=streakMult(streaks[pIdx]); streaks[pIdx]++; return pts*mult; }
-  streaks[pIdx]=0; return -50;
+function computeDelta(g,card,pi){
+  if(!g||g==='__timeout__')return 0;
+  if(g===card.t){const pts=card.t==='bluff'?200:100,mult=streakMult(streaks[pi]);streaks[pi]++;return pts*mult;}
+  streaks[pi]=0;return -50;
 }
-function streakMult(s) { return s>=5?3:s>=3?2:1; }
-function comboLabel(s)  { return s>=5?'🔥 ×3 STREAK':s>=3?'⚡ ×2 COMBO':''; }
+function streakMult(s){return s>=5?3:s>=3?2:1;}
+function comboLabel(s){return s>=5?'🔥 ×3 STREAK':s>=3?'⚡ ×2 COMBO':'';}
 
-// ── Result overlay ─────────────────────────────────────
-function showResult(card, gArr, deltas) {
-  const ov    = document.getElementById('result-overlay');
-  const badge = document.getElementById('res-badge');
-  const txt   = document.getElementById('res-txt');
-  const scs   = document.getElementById('res-scores');
-  const nxt   = document.getElementById('res-next');
-  const anyCorrect = gArr.some(g => g===card.t);
-  let badgeText, badgeClass;
-  if (card.t==='fact') {
-    badgeText=anyCorrect?'✓ CONFIRMED FACT':'✗ WRONG!';
-    badgeClass=anyCorrect?'confirmed':'wrong';
-  } else {
-    badgeText=anyCorrect?'✗ BLUFF BUSTED!':'✓ MISSED IT!';
-    badgeClass=anyCorrect?'busted':'wrong';
-  }
-  badge.textContent=badgeText;
-  badge.className='res-badge slam '+badgeClass;
-  txt.textContent=card.r;
-  const count = mode==='dist'?2:nPlayers;
-  scs.innerHTML = Array.from({length:count},(_,p) => {
-    const d=deltas[p]; const cls=d>0?'gain':d<0?'loss':'nil';
-    return `<div class="res-d ${cls}">${d>0?'+':''}${d} pts</div>`;
-  }).join('');
+function showResult(card,gArr,deltas){
+  const ov=document.getElementById('result-overlay'),badge=document.getElementById('res-badge'),
+        txt=document.getElementById('res-txt'),scs=document.getElementById('res-scores'),nxt=document.getElementById('res-next');
+  const anyOk=gArr.some(g=>g===card.t);
+  const[bt,bc]=card.t==='fact'?[anyOk?'✓ CONFIRMED FACT':'✗ WRONG!',anyOk?'confirmed':'wrong']:[anyOk?'✗ BLUFF BUSTED!':'✓ MISSED IT!',anyOk?'busted':'wrong'];
+  badge.textContent=bt;badge.className='res-badge slam '+bc;txt.textContent=card.r;
+  scs.innerHTML=Array.from({length:mode==='dist'?2:nPlayers},(_,p)=>{const d=deltas[p],c=d>0?'gain':d<0?'loss':'nil';return`<div class="res-d ${c}">${d>0?'+':''}${d} pts</div>`;}).join('');
   ov.classList.add('on');
-  setTimeout(()=>txt.classList.add('on'),200);
-  setTimeout(()=>scs.classList.add('on'),300);
-  setTimeout(()=>nxt.classList.add('on'),400);
-  if (deltas.some(d=>d>0)) launchConfetti(12);
+  setTimeout(()=>txt.classList.add('on'),200);setTimeout(()=>scs.classList.add('on'),300);setTimeout(()=>nxt.classList.add('on'),400);
+  if(deltas.some(d=>d>0))launchConfetti(12);
 }
 
-function hideResult() {
-  const ov  = document.getElementById('result-overlay');
-  const txt = document.getElementById('res-txt');
-  const scs = document.getElementById('res-scores');
-  const nxt = document.getElementById('res-next');
-  ov.classList.remove('on');
-  txt.classList.remove('on');
-  scs.classList.remove('on');
-  nxt.classList.remove('on');
+function hideResult(){
+  const ov=document.getElementById('result-overlay'),txt=document.getElementById('res-txt'),
+        scs=document.getElementById('res-scores'),nxt=document.getElementById('res-next');
+  [ov,txt,scs,nxt].forEach(e=>{if(e)e.classList.remove('on');});
 }
 
-function nextCard() { hideResult(); mode==='dist'?dealCardDist():dealCard(); }
+function nextCard(){hideResult();mode==='dist'?dealCardDist():dealCard();}
 
-// ═══════════════════════════════════════════════════════
-//  PHONE MODE
-// ═══════════════════════════════════════════════════════
-function initPhoneMode(sid) {
-  const badge = document.getElementById('pj-badge');
-  if (badge) badge.textContent = 'Session: ' + sid;
-  show('p-join');
+function initPhoneMode(sid){const b=document.getElementById('pj-badge');if(b)b.textContent='Session: '+sid;show('p-join');}
+
+function phoneJoin(){
+  const name=document.getElementById('pj-name').value.trim()||'Guest';
+  db.ref('sessions/'+sessionId+'/players/p1').update({name,score:0,guess:''});
+  show('p-wait');listenForGameStart();
 }
 
-function phoneJoin() {
-  const name = document.getElementById('pj-name').value.trim() || 'Guest';
-  db.ref('sessions/'+sessionId+'/players/p1').update({name, score:0, guess:''});
-  show('p-wait');
-  listenForGameStart();
-}
-
-function listenForGameStart() {
-  db.ref('sessions/'+sessionId+'/phase').on('value', snap => {
-    if (snap.val()==='playing') { show('p-play'); listenForCardChanges(); }
-    else if (snap.val()==='ended') { show('p-done'); }
+function listenForGameStart(){
+  db.ref('sessions/'+sessionId+'/phase').on('value',snap=>{
+    if(snap.val()==='playing'){show('p-play');listenForCardChanges();}
+    else if(snap.val()==='ended')show('p-done');
   });
 }
 
-function listenForCardChanges() {
-  db.ref('sessions/'+sessionId+'/cardIndex').on('value', snap => {
-    const idx = snap.val();
-    if (idx===null||idx<0) return;
-    phoneGuessed = false;
-    phoneNewCard(idx);
+function listenForCardChanges(){
+  db.ref('sessions/'+sessionId+'/cardIndex').on('value',snap=>{
+    const idx=snap.val();if(idx===null||idx<0)return;
+    phoneGuessed=false;phoneNewCard(idx);
   });
-  db.ref('sessions/'+sessionId+'/result').on('value', snap => {
-    const r = snap.val();
-    if (r) showPhoneResult(r);
-  });
+  db.ref('sessions/'+sessionId+'/result').on('value',snap=>{const r=snap.val();if(r)showPhoneResult(r);});
 }
 
-function phoneNewCard(idx) {
-  const fb=document.getElementById('pp-fact'), bb=document.getElementById('pp-bluff');
-  if (fb) { fb.disabled=false; fb.classList.remove('chosen'); }
-  if (bb) { bb.disabled=false; bb.classList.remove('chosen'); }
+function phoneNewCard(idx){
+  const fb=document.getElementById('pp-fact'),bb=document.getElementById('pp-bluff');
+  if(fb){fb.disabled=false;fb.classList.remove('chosen');}if(bb){bb.disabled=false;bb.classList.remove('chosen');}
   document.getElementById('pp-result').classList.remove('on');
-  db.ref('sessions/'+sessionId+'/cardFace').once('value', snap => {
-    const face = snap.val(); if (!face) return;
-    const wrap=document.getElementById('pp-card-wrap'), img=document.getElementById('pp-card-img');
-    if (wrap) { wrap.style.transform='scaleX(0)'; setTimeout(()=>{ img.src=BASE+face; wrap.style.transform=''; },190); }
+  db.ref('sessions/'+sessionId+'/cardFace').once('value',snap=>{
+    const face=snap.val();if(!face)return;
+    const w=document.getElementById('pp-card-wrap'),i=document.getElementById('pp-card-img');
+    if(w){w.style.transform='scaleX(0)';setTimeout(()=>{i.src=BASE+face;w.style.transform='';},190);}
   });
   startPhoneTimer();
 }
 
-function phoneGuess(choice) {
-  if (phoneGuessed) return;
-  phoneGuessed = true;
-  const fb=document.getElementById('pp-fact'), bb=document.getElementById('pp-bluff');
-  if (fb){fb.disabled=true; fb.classList.remove('chosen');}
-  if (bb){bb.disabled=true; bb.classList.remove('chosen');}
+function phoneGuess(choice){
+  if(phoneGuessed)return;phoneGuessed=true;
+  const fb=document.getElementById('pp-fact'),bb=document.getElementById('pp-bluff');
+  if(fb){fb.disabled=true;fb.classList.remove('chosen');}if(bb){bb.disabled=true;bb.classList.remove('chosen');}
   (choice==='fact'?fb:bb).classList.add('chosen');
   db.ref('sessions/'+sessionId+'/players/p1/guess').set(choice);
 }
 
-function startPhoneTimer() {
-  let secs=15; const bar=document.getElementById('pp-timer-bar');
-  clearInterval(timerInt);
-  if (bar){bar.style.width='100%';bar.style.background='var(--gold)';bar.classList.remove('urgent');}
-  timerInt=setInterval(()=>{
-    secs--;
-    if(bar){bar.style.width=((secs/15)*100)+'%';if(secs<=5)bar.classList.add('urgent');}
-    if(secs<=0) clearInterval(timerInt);
-  },1000);
+function startPhoneTimer(){
+  let secs=15;const bar=document.getElementById('pp-timer-bar');clearInterval(timerInt);
+  if(bar){bar.style.width='100%';bar.style.background='var(--gold)';bar.classList.remove('urgent');}
+  timerInt=setInterval(()=>{secs--;if(bar){bar.style.width=(secs/15*100)+'%';if(secs<=5)bar.classList.add('urgent');}if(secs<=0)clearInterval(timerInt);},1000);
 }
 
-function showPhoneResult(r) {
+function showPhoneResult(r){
   clearInterval(timerInt);
-  const badge=document.getElementById('ppr-badge'), delta=document.getElementById('ppr-delta'),
-        truth=document.getElementById('ppr-truth'), res=document.getElementById('pp-result');
-  const fb=document.getElementById('pp-fact'), bb=document.getElementById('pp-bluff');
-  const myGuess = fb&&fb.classList.contains('chosen')?'fact':bb&&bb.classList.contains('chosen')?'bluff':null;
-  const correct = myGuess===r.cardType;
-  let badgeText, badgeClass;
-  if (r.cardType==='fact') { badgeText=correct?'✓ CORRECT!':'✗ WRONG!'; badgeClass=correct?'confirmed':'wrong'; }
-  else                     { badgeText=correct?'✗ BUSTED IT!':'✓ MISSED IT!'; badgeClass=correct?'busted':'wrong'; }
-  badge.textContent=badgeText; badge.className='ppr-badge slam '+badgeClass;
-  const d1=r.delta1||0;
-  delta.textContent=(d1>=0?'+':'')+d1+' pts';
-  delta.className='ppr-delta '+(d1>0?'gain':d1<0?'loss':'');
-  truth.textContent=r.reveal||'';
-  updatePhoneScores(r);
-  res.classList.add('on');
-  if (d1>0) launchConfetti(8);
+  const badge=document.getElementById('ppr-badge'),delta=document.getElementById('ppr-delta'),
+        truth=document.getElementById('ppr-truth'),res=document.getElementById('pp-result');
+  const fb=document.getElementById('pp-fact'),bb=document.getElementById('pp-bluff');
+  const myGuess=fb&&fb.classList.contains('chosen')?'fact':bb&&bb.classList.contains('chosen')?'bluff':null;
+  const ok=myGuess===r.cardType;
+  const[bt,bc]=r.cardType==='fact'?[ok?'✓ CORRECT!':'✗ WRONG!',ok?'confirmed':'wrong']:[ok?'✗ BUSTED IT!':'✓ MISSED IT!',ok?'busted':'wrong'];
+  badge.textContent=bt;badge.className='ppr-badge slam '+bc;
+  const d1=r.delta1||0;delta.textContent=(d1>=0?'+':'')+d1+' pts';delta.className='ppr-delta '+(d1>0?'gain':d1<0?'loss':'');
+  truth.textContent=r.reveal||'';updatePhoneScores(r);res.classList.add('on');if(d1>0)launchConfetti(8);
 }
 
-function updatePhoneScores(r) {
-  const el=document.getElementById('pp-scores'); if(!el) return;
-  db.ref('sessions/'+sessionId+'/players').once('value', snap => {
-    const ps=snap.val()||{};
-    const n0=ps.p0?.name||'Host', n1=ps.p1?.name||'You';
-    el.innerHTML=`<div class="pp-score"><div class="pp-score-name">${esc(n0)}</div><div class="pp-score-val">${r.score0||0}</div></div>
-      <div class="pp-score mine"><div class="pp-score-name">${esc(n1)} (You)</div><div class="pp-score-val">${r.score1||0}</div></div>`;
+function updatePhoneScores(r){
+  const el=document.getElementById('pp-scores');if(!el)return;
+  db.ref('sessions/'+sessionId+'/players').once('value',snap=>{
+    const ps=snap.val()||{},n0=ps.p0?.name||'Host',n1=ps.p1?.name||'You';
+    el.innerHTML=`<div class="pp-score"><div class="pp-score-name">${esc(n0)}</div><div class="pp-score-val">${r.score0||0}</div></div><div class="pp-score mine"><div class="pp-score-name">${esc(n1)} (You)</div><div class="pp-score-val">${r.score1||0}</div></div>`;
   });
 }
 
-// ═══════════════════════════════════════════════════════
-//  GAME OVER
-// ═══════════════════════════════════════════════════════
-function endGame() { if(!confirm('End the game now?')) return; forceEndGame(); }
-
-function forceEndGame() {
+function endGame(){if(!confirm('End the game now?'))return;forceEndGame();}
+function forceEndGame(){
   stopTimer();
-  if (sessionId&&mode==='dist') db.ref('sessions/'+sessionId).update({phase:'ended',gameOver:true});
-  document.getElementById('end-btn').style.display='none';
-  showGameOver();
+  if(sessionId&&mode==='dist')db.ref('sessions/'+sessionId).update({phase:'ended',gameOver:true});
+  document.getElementById('end-btn').style.display='none';showGameOver();
 }
 
-function showGameOver() {
-  const sub=document.getElementById('go-sub');
-  if (sub) sub.textContent=cardIdx+' card'+(cardIdx!==1?'s':'')+' played';
+function showGameOver(){
+  const sub=document.getElementById('go-sub');if(sub)sub.textContent=cardIdx+' card'+(cardIdx!==1?'s':'')+' played';
   const rows=document.getElementById('go-rows');
-  if (mode==='dist'&&sessionId) {
-    db.ref('sessions/'+sessionId+'/players').once('value', snap => {
-      const ps=snap.val()||{};
-      renderGameOverRows([{name:ps.p0?.name||'Host',score:scores[0]},{name:ps.p1?.name||'Guest',score:scores[1]}],rows);
-    });
-  } else {
-    renderGameOverRows(Array.from({length:nPlayers},(_,p)=>({
-      name:p===0?(document.getElementById('pname0')?.textContent||'P1'):(document.getElementById('pname1')?.textContent||'P2'),
-      score:scores[p]
-    })),rows);
+  if(mode==='dist'&&sessionId){
+    db.ref('sessions/'+sessionId+'/players').once('value',snap=>{
+      const ps=snap.val()||{};renderGameOverRows([{name:ps.p0?.name||'Host',score:scores[0]},{name:ps.p1?.name||'Guest',score:scores[1]}],rows);});
+  }else{
+    renderGameOverRows(Array.from({length:nPlayers},(_,p)=>({name:p===0?(document.getElementById('pname0')?.textContent||'P1'):(document.getElementById('pname1')?.textContent||'P2'),score:scores[p]})),rows);
   }
-  const best=Math.max(...scores), prize=document.getElementById('go-prize');
-  if (prize) {
-    prize.style.display=best>=500?'':'none';
-    if(best>=500) document.getElementById('go-prize-body').textContent='Score of '+best+'! Visit the ITS stand to claim your prize.';
-  }
-  show('gameover'); launchConfetti(30);
+  const best=Math.max(...scores),prize=document.getElementById('go-prize');
+  if(prize){prize.style.display=best>=500?'':'none';if(best>=500)document.getElementById('go-prize-body').textContent='Score of '+best+'! Visit the ITS stand to claim your prize.';}
+  show('gameover');launchConfetti(30);
 }
 
-function renderGameOverRows(players, el) {
-  if(!el) return;
-  const sorted=[...players].sort((a,b)=>b.score-a.score);
+function renderGameOverRows(players,el){
+  if(!el)return;
   const medals=['🥇','🥈','🥉'];
-  el.innerHTML=sorted.map((p,i)=>`<div class="go-row"><div class="go-row-l"><span class="go-row-rank">${medals[i]||(i+1)+'.'}</span><span class="go-row-name">${esc(p.name)}</span></div><span class="go-row-score">${p.score}</span></div>`).join('');
+  el.innerHTML=[...players].sort((a,b)=>b.score-a.score).map((p,i)=>
+    `<div class="go-row"><div class="go-row-l"><span class="go-row-rank">${medals[i]||(i+1)+'.'}</span><span class="go-row-name">${esc(p.name)}</span></div><span class="go-row-score">${p.score}</span></div>`
+  ).join('');
 }
 
-function backToStart() { document.getElementById('end-btn').style.display='none'; show('mode-select'); }
+function backToStart(){document.getElementById('end-btn').style.display='none';show('mode-select');}
 
-// ═══════════════════════════════════════════════════════
-//  LEADERBOARD
-// ═══════════════════════════════════════════════════════
-function saveLeaderboard() {
-  try {
-    const key='its_lb_'+new Date().toISOString().slice(0,10);
-    const lb=JSON.parse(localStorage.getItem(key)||'[]');
+function saveLeaderboard(){
+  try{
+    const key='its_lb_'+new Date().toISOString().slice(0,10),lb=JSON.parse(localStorage.getItem(key)||'[]');
     for(let p=0;p<nPlayers;p++){
       const name=p===0?(document.getElementById('pname0')?.textContent||'P1'):(document.getElementById('pname1')?.textContent||'P2');
       const i=lb.findIndex(e=>e.name===name);
       if(i>=0){if(scores[p]>lb[i].score)lb[i].score=scores[p];}else lb.push({name,score:scores[p]});
     }
-    lb.sort((a,b)=>b.score-a.score);
-    localStorage.setItem(key,JSON.stringify(lb.slice(0,10)));
-    updateHiScore();
+    lb.sort((a,b)=>b.score-a.score);localStorage.setItem(key,JSON.stringify(lb.slice(0,10)));updateHiScore();
   }catch(e){}
 }
 
-function updateHiScore() {
-  try {
-    const key='its_lb_'+new Date().toISOString().slice(0,10);
-    const lb=JSON.parse(localStorage.getItem(key)||'[]');
-    if(!lb.length) return;
-    const text="🏆 Today's best: "+lb[0].name+' '+lb[0].score;
-    const h1=document.getElementById('g-hi'), h2=document.getElementById('g-hi-dist');
-    if(h1) h1.textContent=text; if(h2) h2.textContent=text;
+function updateHiScore(){
+  try{
+    const key='its_lb_'+new Date().toISOString().slice(0,10),lb=JSON.parse(localStorage.getItem(key)||'[]');
+    if(!lb.length)return;const text="🏆 Today's best: "+lb[0].name+' '+lb[0].score;
+    const h1=document.getElementById('g-hi'),h2=document.getElementById('g-hi-dist');
+    if(h1)h1.textContent=text;if(h2)h2.textContent=text;
   }catch(e){}
 }
 
-// ═══════════════════════════════════════════════════════
-//  ANIMATIONS
-// ═══════════════════════════════════════════════════════
-function launchConfetti(n) {
+function launchConfetti(n){
   const cols=['#ffa300','#ff5714','#10c0f1','#00ff88','#ff3355','#fff'];
-  for(let i=0;i<n;i++){
-    setTimeout(()=>{
-      const el=document.createElement('div');
-      el.className='cp';
-      el.style.cssText=`left:${Math.random()*100}vw;background:${cols[Math.floor(Math.random()*cols.length)]};width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;border-radius:${Math.random()>.5?'50%':'2px'};animation-duration:${1.2+Math.random()*1.4}s;`;
-      document.body.appendChild(el);
-      setTimeout(()=>el.remove(),2800);
-    },i*60);
-  }
+  for(let i=0;i<n;i++){setTimeout(()=>{
+    const el=document.createElement('div');el.className='cp';
+    el.style.cssText=`left:${Math.random()*100}vw;background:${cols[~~(Math.random()*cols.length)]};width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;border-radius:${Math.random()>.5?'50%':'2px'};animation-duration:${1.2+Math.random()*1.4}s;`;
+    document.body.appendChild(el);setTimeout(()=>el.remove(),2800);
+  },i*60);}
 }
 
-function floatScore(delta, xFrac) {
-  const el=document.createElement('div');
-  el.className='sf'+(delta<0?' loss':'');
-  el.textContent=(delta>0?'+':'')+delta;
-  el.style.left=(xFrac*100)+'vw'; el.style.top='50vh';
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(),950);
+function floatScore(delta,xFrac){
+  const el=document.createElement('div');el.className='sf'+(delta<0?' loss':'');
+  el.textContent=(delta>0?'+':'')+delta;el.style.left=(xFrac*100)+'vw';el.style.top='50vh';
+  document.body.appendChild(el);setTimeout(()=>el.remove(),950);
 }
 
-// ═══════════════════════════════════════════════════════
-//  UTILITIES
-// ═══════════════════════════════════════════════════════
-function show(id) {
-  document.querySelectorAll('.screen').forEach(s=>s.classList.add('off'));
-  const el=document.getElementById(id); if(el) el.classList.remove('off');
-}
-function shuffle(arr) {
-  for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
-  return arr;
-}
-function randCode(len) {
-  const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  return Array.from({length:len},()=>chars[Math.floor(Math.random()*chars.length)]).join('');
-}
-function esc(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.add('off'));const el=document.getElementById(id);if(el)el.classList.remove('off');}
+function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=~~(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
+function randCode(len){const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';return Array.from({length:len},()=>c[~~(Math.random()*c.length)]).join('');}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 </script>
 </body>
 </html>
